@@ -2,22 +2,7 @@ from datetime import datetime
 from replit import db
 import random
 
-# db['Max'] = ['Ellie', 'Aravinth']
-# db['Jess'] = ['Sarah', 'Cam', 'Natalie']
-# db['Fish'] = ['Ryan', 'Fish']
-# db['Chloe'] = ['Aravinth', 'Max', 'Shi']
-# db['Lauren'] = ['Shihan', 'Natalie']
-# db['Andre'] = ['Fish', 'Natalie', 'Ellie']
-# db['Ryan'] = ['Jemima', 'Fish']
-# db['Cam'] = ['Jess', 'Jemima']
-# db['Shihan'] = ['Aravinth', 'Lauren', 'Chloe']
-# db['Ellie'] = ['Sarah', 'Max', 'Andre']
-# db['Natalie'] = ['Lauren', 'Andre', 'Jess']
-# db['Jemima'] = ['Cam', 'Ryan']
-# db['Aravinth'] = ['Shihan', 'Chloe', 'Max']
-# db['Sarah'] = ['Jess', 'Ellie']
-# db['Alison'] = []
-
+# TODO: load in peeps from chummers.txt?
 peeps = [
   'Cam',
   'Chloe',
@@ -55,7 +40,18 @@ def add_pairs_to_db(pairs):
 
 
 def format_pairs(pairs):
-  formatted_string = f"{datetime.now().month}/{datetime.now().year} \n"
+  formatted_string = f"""
+                         .
+                        ":"
+                      ___:____     |"\/"|
+                    ,'        `.    \  /
+          .         |  O        \___/  |
+^~^~\_____)\_____^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~ 
+    /--v____ __°<     CHUM TIME
+            )/           
+            '
+"""
+  
   for pair in pairs:
     formatted_string += f"{pair[0]}, {pair[1]}\n"
   return formatted_string
@@ -102,7 +98,7 @@ def export_db():
       for val in db[key]:
         string_builder += f"{val} "
       f.write(f"{string_builder.strip()}\n")
-  
+
     f.close()
 
 
@@ -128,15 +124,17 @@ def main():
   while rerun_generation:
     pairs = gen_pairs()
     print(format_pairs(pairs))
-  
+
     print("Do these pairs look good? (yes/no)")
     answer = input()
     if answer == "yes":
-      print("Finalizing pairs. Adding chums to database and exporting save file.")
+      print(
+        "Finalizing pairs. Adding chums to database and exporting save file.")
 
-      print("Currently does nothing.... to remove when below is uncommented.")
+      print("CURRENTLY DOES NOTHING.... remove this when below is uncommented.")
       # add_pairs_to_db(pairs)
       # export_db()
+      rerun_generation = False
     elif answer == "no":
       print("The database has not been updated, do not use the pairs above.")
       print("Rerun generation? (yes/no)")
@@ -144,5 +142,6 @@ def main():
     else:
       print("Invalid answer, goodbye.")
       rerun_generation = False
+
 
 main()
